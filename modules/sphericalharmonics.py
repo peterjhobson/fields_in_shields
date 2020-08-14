@@ -225,6 +225,19 @@ def b3m3(scale=1):
             [[0], [0, 0, 0], [0, 0, 0, 0, 0, 0]]]
 
 
+def b_sum(*inds):
+    """Sum together nested lists of indicies to generate a combination of spherical harmonics.
+    [[[x],[x,y,z],[x^2,xy,xz,y^2,yz,z^2]],
+    [[y],[x,y,z],[x^2,xy,xz,y^2,yz,z^2]],
+    [[z],[x,y,z],[x^2,xy,xz,y^2,yz,z^2]]].
+
+    Keyword arguments:
+    inds -- spherical harmonic indicies
+    """
+
+    return [[[sum(i) for i in zip(*inds)] for inds in zip(*zipped_list)] for zipped_list in zip(*inds)]
+
+
 def b_sphericalharmonics(coords_target, ind):
     """Calculates the magnetic field at coords_target using spherical harmonic indices.
 

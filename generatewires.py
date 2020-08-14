@@ -14,6 +14,7 @@ import time
 
 import numpy as np
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 sys.path.append(os.path.join(os.getcwd(), 'modules'))
 import targetpoints
@@ -22,7 +23,7 @@ import sphericalharmonics
 import componentfunctions
 
 # CHOOSE YOUR SAVEPATH HERE!!!
-savepath = os.path.join(os.getcwd(), 'simulations', 'test 1')
+savepath = os.path.join(os.getcwd(), 'examples', '2Bx + Bz')
 if not os.path.exists(savepath):
     os.makedirs(savepath)
 else:
@@ -36,13 +37,15 @@ if not os.path.exists(os.path.join(savepath, 'plots')):
 # optiparams
 N = 100  # maximum order of Fourier modes
 M = 1  # maximum degree of Fourier modes (equal to degree of the harmonic)
-k_lim = 50  # limit to the 'k' integral
-p_lim = 20  # limit to the 'p' summation
+k_maximum = 50  # upper bound to the 'k' integral (assumed to be infinity)
+p_maximum = 20  # upper bound to the 'p' summation (assumed to be infinity)
 beta = 1e-16 * (1e-3 / 1.68e-8)  # weighting of the power optimization term #[1]
 res = 1.68e-8  # resistivity of the conductor #[Ohm m]
 t = 1e-3  # thickness of the conductor #[m]
 n_contours = 250
-B_des_ind = sphericalharmonics.b1p1()  # desired magnetic field harmonic
+B_des_ind = sphericalharmonics.b_sum(sphericalharmonics.b1p1(scale=2),
+                                     sphericalharmonics.b10(scale=1))  # desired magnetic field harmonic
+# it's easiest to decompose field into spherical harmonics and add them together as appropriate
 
 new_containers = True
 # this is the slowest bit of the code -- if you're iterating the same N, M, target points and are
@@ -56,7 +59,7 @@ nomu_calculation = True
 rho_cs = np.array(0.245).reshape(1)  # radii of coils #m
 z_prime_c1s = np.array(0.475).reshape(1)  # top z position of coils #m
 z_prime_c2s = -z_prime_c1s  # bottom z position of coils #m
-n_phi_c = 500  # number of phi points to sample #[1]
+n_phi_c = 400  # number of phi points to sample #[1]
 n_z_c = 500  # number of z points to sample #[1]
 a = 0.25  # radius of the passive shield #m
 L = 1  # length of the passive shield #m
@@ -106,7 +109,6 @@ c0_mesz = np.array((0, 0, 0))
 coords_mesz_cylindrical = targetpoints.cubic_grid_cylindrical([l_x_mesz, l_y_mesz, l_z_mesz],
                                                               [n_x_mesz, n_y_mesz, n_z_mesz], c0_mesz)
 
-# MODIFY the desired fields to match the profile required
 B_des_tp_cartesian = sphericalharmonics.b_sphericalharmonics(targetpoints.poltocart(coords_tp_cylindrical), B_des_ind)
 # Cartesian #Desired magnetic field #(n_points, (x, y, z))
 B_des_tp_cylindrical = targetpoints.fieldcarttopol(B_des_tp_cartesian, coords_tp_cylindrical)
@@ -127,7 +129,7 @@ B_des_mesz_cylindrical = targetpoints.fieldcarttopol(B_des_mesz_cartesian, coord
 np.savetxt(os.path.join(savepath, 'coil_params.csv'),
            np.array((rho_cs[0], z_prime_c1s[0], z_prime_c2s[0], a, L)), delimiter=",")
 np.savetxt(os.path.join(savepath, 'opti_params.csv'),
-           np.array((N, M, p_lim, beta, res, t)), delimiter=",")
+           np.array((N, M, p_maximum, beta, res, t)), delimiter=",")
 
 t1 = time.time()
 
@@ -167,7 +169,7 @@ ax1.quiver(
     B_des_tp_cartesian[:, 0],
     B_des_tp_cartesian[:, 1],
     B_des_tp_cartesian[:, 2],
-    color='red', length=0.1)
+    color='red', length=0.02)
 ax1.set_xlabel(r'$x$ (m)')
 ax1.set_ylabel(r'$y$ (m)')
 ax1.set_zlabel(r'$z$ (m)')
@@ -182,7 +184,7 @@ if new_containers:
     W0_targetpoints, W_targetpoints, Q_targetpoints = componentfunctions.integral_containers(coords_tp_cylindrical,
                                                                                              rho_cs, z_prime_c1s,
                                                                                              z_prime_c2s,
-                                                                                             [N, M, p_lim, a, L])
+                                                                                             [N, M, p_maximum, a, L])
     Cpwr_cmp_0 = componentfunctions.power_matrix_0(rho_cs, z_prime_c1s, z_prime_c2s, [N, M, res, t])
     Cpwr_cmp = componentfunctions.power_matrix(rho_cs, z_prime_c1s, z_prime_c2s, [N, M, res, t])
 
@@ -190,9 +192,10 @@ W0 = componentfunctions.fourier_calculation_0(W0_targetpoints, B_des_tp_cylindri
 W = componentfunctions.fourier_calculation(W_targetpoints, B_des_tp_cylindrical, Cpwr_cmp, beta)
 Q = componentfunctions.fourier_calculation(Q_targetpoints, B_des_tp_cylindrical, Cpwr_cmp, beta)
 
-B_anal_tp_cylindrical = componentfunctions.b_calculation(coords_tp_cylindrical, W0_targetpoints, W0, W_targetpoints, W,
-                                                         Q_targetpoints, Q)
-B_anal_tp_cartesian = targetpoints.fieldpoltocart(B_anal_tp_cylindrical, coords_tp_cylindrical)
+B_analytic_tp_cylindrical = componentfunctions.b_calculation(coords_tp_cylindrical, W0_targetpoints, W0, W_targetpoints,
+                                                             W,
+                                                             Q_targetpoints, Q)
+B_analytic_tp_cartesian = targetpoints.fieldpoltocart(B_analytic_tp_cylindrical, coords_tp_cylindrical)
 
 np.savetxt(os.path.join(savepath, 'W0.csv'), W0.reshape(N, 1), delimiter=",")
 np.savetxt(os.path.join(savepath, 'W.csv'), W.reshape(N, M), delimiter=",")
@@ -200,7 +203,7 @@ np.savetxt(os.path.join(savepath, 'Q.csv'), Q.reshape(N, M), delimiter=",")
 
 np.savetxt(os.path.join(savepath, 'tp.csv'), targetpoints.poltocart(coords_tp_cylindrical), delimiter=",")
 np.savetxt(os.path.join(savepath, 'B_desired_tp.csv'), B_des_tp_cartesian, delimiter=",")
-np.savetxt(os.path.join(savepath, 'B_analytic_tp.csv'), B_anal_tp_cartesian, delimiter=",")
+np.savetxt(os.path.join(savepath, 'B_analytic_tp.csv'), B_analytic_tp_cartesian, delimiter=",")
 
 t1 = time.time()
 
@@ -213,13 +216,13 @@ if nomu_calculation:
     if new_containers:
         W0_targetpoints_nomu, W_targetpoints_nomu, Q_targetpoints_nomu = componentfunctions.integral_containers_nomu(
             coords_tp_cylindrical, rho_cs, z_prime_c1s, z_prime_c2s,
-            [N, M, k_lim])
+            [N, M, k_maximum])
 
-    B_nomu_anal_tp_cylindrical = componentfunctions.b_calculation(coords_tp_cylindrical, W0_targetpoints_nomu, W0,
-                                                                  W_targetpoints_nomu, W, Q_targetpoints_nomu, Q)
-    B_nomu_anal_tp_cartesian = targetpoints.fieldpoltocart(B_nomu_anal_tp_cylindrical, coords_tp_cylindrical)
+    B_nomu_analytic_tp_cylindrical = componentfunctions.b_calculation(coords_tp_cylindrical, W0_targetpoints_nomu, W0,
+                                                                      W_targetpoints_nomu, W, Q_targetpoints_nomu, Q)
+    B_nomu_analytic_tp_cartesian = targetpoints.fieldpoltocart(B_nomu_analytic_tp_cylindrical, coords_tp_cylindrical)
 
-    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_tp.csv'), B_nomu_anal_tp_cartesian, delimiter=",")
+    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_tp.csv'), B_nomu_analytic_tp_cartesian, delimiter=",")
 
     t1 = time.time()
 
@@ -234,7 +237,8 @@ sf_c1 = componentfunctions.streamfunction_calculation(coords_c1_cylindrical, W0,
 sfct_c1 = np.fliplr(sf_c1.reshape(n_phi_c, n_z_c))
 curr_c1 = (sfct_c1.max() - sfct_c1.min()) / n_contours
 levels_c1 = sfct_c1.min() + (np.arange(1, n_contours + 1) - 0.5) * curr_c1
-cnts_c1 = plt.contour(sfct_c1, levels=levels_c1).allsegs
+X, Y = np.meshgrid(np.linspace(0, n_z_c-1, n_z_c), np.linspace(0, n_phi_c-1, n_phi_c))
+cnts_c1 = plt.contour(X, Y, sfct_c1, levels=levels_c1).allsegs
 plt.close()
 
 contours_c1_cartesian, contours_c1_cylindrical = targetpoints.poltocartcontour(cnts_c1, [rho_cs[0], z_prime_c1s[0],
@@ -291,24 +295,24 @@ ax3.quiver(
     B_des_tp_cartesian[:, 0],
     B_des_tp_cartesian[:, 1],
     B_des_tp_cartesian[:, 2],
-    length=0.075, color='black')
+    length=0.02, color='black')
 ax3.quiver(
     targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
     targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
     targetpoints.poltocart(coords_tp_cylindrical)[:, 2],
-    B_anal_tp_cartesian[:, 0],
-    B_anal_tp_cartesian[:, 1],
-    B_anal_tp_cartesian[:, 2],
-    length=0.075, color='red')
+    B_analytic_tp_cartesian[:, 0],
+    B_analytic_tp_cartesian[:, 1],
+    B_analytic_tp_cartesian[:, 2],
+    length=0.02, color='red')
 if nomu_calculation:
     ax3.quiver(
         targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
         targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
         targetpoints.poltocart(coords_tp_cylindrical)[:, 2],
-        B_nomu_anal_tp_cartesian[:, 0],
-        B_nomu_anal_tp_cartesian[:, 1],
-        B_nomu_anal_tp_cartesian[:, 2],
-        length=0.075, color='orange')
+        B_nomu_analytic_tp_cartesian[:, 0],
+        B_nomu_analytic_tp_cartesian[:, 1],
+        B_nomu_analytic_tp_cartesian[:, 2],
+        length=0.02, color='orange')
 ax3.quiver(
     targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
     targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
@@ -316,7 +320,7 @@ ax3.quiver(
     B_BS_tp_cartesian[:, 0],
     B_BS_tp_cartesian[:, 1],
     B_BS_tp_cartesian[:, 2],
-    length=0.075, color='green')
+    length=0.02, color='green')
 ax3.scatter(targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
             targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
             targetpoints.poltocart(coords_tp_cylindrical)[:, 2])
@@ -333,29 +337,31 @@ t0 = time.time()
 if new_containers:
     W0_mesx, W_mesx, Q_mesx = componentfunctions.integral_containers(coords_mesx_cylindrical, rho_cs, z_prime_c1s,
                                                                      z_prime_c2s,
-                                                                     [N, M, p_lim, a, L])
+                                                                     [N, M, p_maximum, a, L])
     if nomu_calculation:
         WO_mesx_nomu, W_mesx_nomu, Q_mesx_nomu = componentfunctions.integral_containers_nomu(coords_mesx_cylindrical,
                                                                                              rho_cs,
                                                                                              z_prime_c1s, z_prime_c2s,
-                                                                                             [N, M, k_lim])
+                                                                                             [N, M, k_maximum])
 
-B_anal_mesx_cylindrical = componentfunctions.b_calculation(coords_mesx_cylindrical, W0_mesx, W0, W_mesx, W, Q_mesx, Q)
-B_anal_mesx_cartesian = targetpoints.fieldpoltocart(B_anal_mesx_cylindrical, coords_mesx_cylindrical)
+B_analytic_mesx_cylindrical = componentfunctions.b_calculation(coords_mesx_cylindrical, W0_mesx, W0, W_mesx, W, Q_mesx,
+                                                               Q)
+B_analytic_mesx_cartesian = targetpoints.fieldpoltocart(B_analytic_mesx_cylindrical, coords_mesx_cylindrical)
 B_BS_mesx_cartesian = biotsavart.b_contours(targetpoints.poltocart(coords_mesx_cylindrical), contours_c1_cartesian,
                                             curr_c1)
 
 np.savetxt(os.path.join(savepath, 'mesx.csv'), targetpoints.poltocart(coords_mesx_cylindrical), delimiter=",")
 np.savetxt(os.path.join(savepath, 'B_desired_mesx.csv'), B_des_mesx_cartesian, delimiter=",")
-np.savetxt(os.path.join(savepath, 'B_analytic_mesx.csv'), B_anal_mesx_cartesian, delimiter=",")
+np.savetxt(os.path.join(savepath, 'B_analytic_mesx.csv'), B_analytic_mesx_cartesian, delimiter=",")
 np.savetxt(os.path.join(savepath, 'B_BiotSavart_mesx.csv'), B_BS_mesx_cartesian, delimiter=",")
 
 if nomu_calculation:
-    B_nomu_anal_mesx_cylindrical = componentfunctions.b_calculation(coords_mesx_cylindrical, WO_mesx_nomu, W0,
-                                                                    W_mesx_nomu, W, Q_mesx_nomu, Q)
-    B_nomu_anal_mesx_cartesian = targetpoints.fieldpoltocart(B_nomu_anal_mesx_cylindrical, coords_mesx_cylindrical)
+    B_nomu_analytic_mesx_cylindrical = componentfunctions.b_calculation(coords_mesx_cylindrical, WO_mesx_nomu, W0,
+                                                                        W_mesx_nomu, W, Q_mesx_nomu, Q)
+    B_nomu_analytic_mesx_cartesian = targetpoints.fieldpoltocart(B_nomu_analytic_mesx_cylindrical,
+                                                                 coords_mesx_cylindrical)
 
-    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_mesx.csv'), B_nomu_anal_mesx_cartesian, delimiter=",")
+    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_mesx.csv'), B_nomu_analytic_mesx_cartesian, delimiter=",")
 
 t1 = time.time()
 print('***Calculation along x-axis completed in {:.3} s***'.format(t1 - t0))
@@ -371,11 +377,12 @@ if B_ind == 2:
 
 fig4, ax4 = plt.subplots(1, 1)
 ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_des_mesx_cartesian[:, B_ind], color='black')
-ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_anal_mesx_cartesian[:, B_ind], color='red', zorder=20)
+ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_analytic_mesx_cartesian[:, B_ind], color='red',
+         zorder=20)
 ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_BS_mesx_cartesian[:, B_ind], color='green', ls='--',
          zorder=10)
 if nomu_calculation:
-    ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_nomu_anal_mesx_cartesian[:, B_ind],
+    ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_nomu_analytic_mesx_cartesian[:, B_ind],
              color='orange')
 ax4.set_xlabel('$x$' + r' $\mathrm{ (m)}$')
 ax4.set_ylabel(r'$B_{{{}}}$'.format(fpx) + r' $\mathrm{ (T)}$')
@@ -390,35 +397,37 @@ t0 = time.time()
 if new_containers:
     W0_mesz, W_mesz, Q_mesz = componentfunctions.integral_containers(coords_mesz_cylindrical, rho_cs, z_prime_c1s,
                                                                      z_prime_c2s,
-                                                                     [N, M, p_lim, a, L])
+                                                                     [N, M, p_maximum, a, L])
     if nomu_calculation:
         WO_mesz_nomu, W_mesz_nomu, Q_mesz_nomu = componentfunctions.integral_containers_nomu(coords_mesz_cylindrical,
                                                                                              rho_cs,
                                                                                              z_prime_c1s, z_prime_c2s,
-                                                                                             [N, M, k_lim])
+                                                                                             [N, M, k_maximum])
 
-B_anal_mesz_cylindrical = componentfunctions.b_calculation(coords_mesz_cylindrical, W0_mesz, W0, W_mesz, W, Q_mesz, Q)
-B_anal_mesz_cartesian = targetpoints.fieldpoltocart(B_anal_mesz_cylindrical, coords_mesz_cylindrical)
+B_analytic_mesz_cylindrical = componentfunctions.b_calculation(coords_mesz_cylindrical, W0_mesz, W0, W_mesz, W, Q_mesz,
+                                                               Q)
+B_analytic_mesz_cartesian = targetpoints.fieldpoltocart(B_analytic_mesz_cylindrical, coords_mesz_cylindrical)
 B_BS_mesz_cartesian = biotsavart.b_contours(targetpoints.poltocart(coords_mesz_cylindrical), contours_c1_cartesian,
                                             curr_c1)
 
 np.savetxt(os.path.join(savepath, 'mesz.csv'), targetpoints.poltocart(coords_mesz_cylindrical), delimiter=",")
 np.savetxt(os.path.join(savepath, 'B_desired_mesz.csv'), B_des_mesz_cartesian, delimiter=",")
-np.savetxt(os.path.join(savepath, 'B_analytic_mesz.csv'), B_anal_mesz_cartesian, delimiter=",")
+np.savetxt(os.path.join(savepath, 'B_analytic_mesz.csv'), B_analytic_mesz_cartesian, delimiter=",")
 np.savetxt(os.path.join(savepath, 'B_BiotSavart_mesz.csv'), B_BS_mesz_cartesian, delimiter=",")
 
 if nomu_calculation:
-    B_nomu_anal_mesz_cylindrical = componentfunctions.b_calculation(coords_mesz_cylindrical, WO_mesz_nomu, W0,
-                                                                    W_mesz_nomu, W, Q_mesz_nomu, Q)
-    B_nomu_anal_mesz_cartesian = targetpoints.fieldpoltocart(B_nomu_anal_mesz_cylindrical, coords_mesz_cylindrical)
+    B_nomu_analytic_mesz_cylindrical = componentfunctions.b_calculation(coords_mesz_cylindrical, WO_mesz_nomu, W0,
+                                                                        W_mesz_nomu, W, Q_mesz_nomu, Q)
+    B_nomu_analytic_mesz_cartesian = targetpoints.fieldpoltocart(B_nomu_analytic_mesz_cylindrical,
+                                                                 coords_mesz_cylindrical)
 
-    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_mesz.csv'), B_nomu_anal_mesz_cartesian, delimiter=",")
+    np.savetxt(os.path.join(savepath, 'B_nomu_analytic_mesz.csv'), B_nomu_analytic_mesz_cartesian, delimiter=",")
 
 t1 = time.time()
 print('***Calculation along z-axis completed in {:.3} s***'.format(t1 - t0))
 
 # Field along z-axis
-B_ind = 0  # select index of field to plot
+B_ind = 2  # select index of field to plot
 if B_ind == 0:
     fpz = 'x'
 if B_ind == 1:
@@ -428,11 +437,12 @@ if B_ind == 2:
 
 fig5, ax5 = plt.subplots(1, 1)
 ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_des_mesz_cartesian[:, B_ind], color='black')
-ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_anal_mesz_cartesian[:, B_ind], color='red', zorder=20)
+ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_analytic_mesz_cartesian[:, B_ind], color='red',
+         zorder=20)
 ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_BS_mesz_cartesian[:, B_ind], color='green', ls='--',
          zorder=10)
 if nomu_calculation:
-    ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_nomu_anal_mesz_cartesian[:, B_ind],
+    ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_nomu_analytic_mesz_cartesian[:, B_ind],
              color='orange')
 ax5.set_xlabel('$z$' + r' $\mathrm{ (m)}$')
 ax5.set_ylabel(r'$B_{{{}}}$'.format(fpz) + r' $\mathrm{ (T)}$')

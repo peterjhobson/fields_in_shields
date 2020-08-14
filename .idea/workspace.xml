@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fb6836a2-246f-4ae4-a91b-5b020e0e8dcc" name="Default Changelist" comment="Update README.txt">
+      <change beforePath="$PROJECT_DIR$/license.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="github/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Peter Hobson &lt;peter_hobson@hotmail.co.uk&gt;" />
+        <option value="peterjhobson" />
+        <option value="PJ Hobson" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ef7c2c7e55f4c8882568270612c0c18b8d8f57a8" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/peterjhobson/fields_in_shields.git" />
+      </set>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="dbdbf552-a80d-44db-9237-2fb404d0883c" />
+  <component name="ProjectId" id="1ZDNmZNOXtIszbIscn4gefzMIeX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
+    <option name="myUseExistingConsole" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="D:\OneDrive - The University of Nottingham\Cylinder Coils\Python Code\Brum Paper" />
+      <recent name="D:\OneDrive - The University of Nottingham\Cylinder Coils\Python Code" />
+      <recent name="D:\OneDrive - The University of Nottingham\Cylinder Coils\Python Code\Mike Paper" />
+      <recent name="D:\OneDrive - The University of Nottingham\Cylinder Coils\Python Code\Modules" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="D:\OneDrive - The University of Nottingham\Cylinder Coils\Python Code\Brum Paper" />
+      <recent name="D:\OneDrive - The University of Nottingham\Planar Coils\Python Code" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.generatewires">
+    <configuration name="FieldHomogeneityColourmapGolayPMC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python Code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Mike Paper" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mike Paper/FieldHomogeneityColourmapGolayPMC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FieldHomogeneityColourmapUniform" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python Code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Mike Paper" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mike Paper/FieldHomogeneityColourmapUniform.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="FieldHomogeneityColourmapUniformPMC" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python Code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Mike Paper" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Mike Paper/FieldHomogeneityColourmapUniformPMC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Python Code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="biotsavart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python Code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/biotsavart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="generatewires" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/opt/anaconda3/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generatewires.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.FieldHomogeneityColourmapUniformPMC" />
+      <item itemvalue="Python.FieldHomogeneityColourmapUniform" />
+      <item itemvalue="Python.FieldHomogeneityColourmapGolayPMC" />
+      <item itemvalue="Python.biotsavart" />
+      <item itemvalue="Python.generatewires" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.generatewires" />
+        <item itemvalue="Python.biotsavart" />
+        <item itemvalue="Python.FieldHomogeneityColourmapGolayPMC" />
+        <item itemvalue="Python.FieldHomogeneityColourmapUniform" />
+        <item itemvalue="Python.FieldHomogeneityColourmapUniformPMC" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fb6836a2-246f-4ae4-a91b-5b020e0e8dcc" name="Default Changelist" comment="" />
+      <created>1584369864127</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584369864127</updated>
+      <workItem from="1584369872504" duration="13877000" />
+      <workItem from="1584446693987" duration="9585000" />
+      <workItem from="1584899047349" duration="5368000" />
+      <workItem from="1585051076947" duration="4301000" />
+      <workItem from="1585066431092" duration="3606000" />
+      <workItem from="1585134243771" duration="2692000" />
+      <workItem from="1585139539231" duration="13462000" />
+      <workItem from="1585312486337" duration="2640000" />
+      <workItem from="1585317667247" duration="14276000" />
+      <workItem from="1585413917000" duration="2690000" />
+      <workItem from="1585416637748" duration="2227000" />
+      <workItem from="1585421040926" duration="5042000" />
+      <workItem from="1585569389322" duration="17830000" />
+      <workItem from="1585653215249" duration="10925000" />
+      <workItem from="1585674979748" duration="1742000" />
+      <workItem from="1585761337479" duration="35652000" />
+      <workItem from="1586018324542" duration="53211000" />
+      <workItem from="1586378570133" duration="1177000" />
+      <workItem from="1586516084268" duration="2314000" />
+      <workItem from="1586597663038" duration="1672000" />
+      <workItem from="1586599395415" duration="9734000" />
+      <workItem from="1586689395158" duration="57000" />
+      <workItem from="1587512668458" duration="655000" />
+      <workItem from="1587899638810" duration="304000" />
+      <workItem from="1587902034459" duration="4309000" />
+      <workItem from="1587907382373" duration="4193000" />
+      <workItem from="1587978355018" duration="8182000" />
+      <workItem from="1588066057378" duration="21931000" />
+      <workItem from="1588154247158" duration="3078000" />
+      <workItem from="1588159342983" duration="16821000" />
+      <workItem from="1588241303526" duration="16128000" />
+      <workItem from="1588326381992" duration="24062000" />
+      <workItem from="1588433691620" duration="3450000" />
+      <workItem from="1588437171401" duration="14660000" />
+      <workItem from="1588609158973" duration="46812000" />
+      <workItem from="1589126864041" duration="10223000" />
+      <workItem from="1589365514878" duration="11131000" />
+      <workItem from="1589447933941" duration="7846000" />
+      <workItem from="1589470255057" duration="11814000" />
+      <workItem from="1589750984493" duration="2720000" />
+      <workItem from="1589793280055" duration="9823000" />
+      <workItem from="1589874032605" duration="5004000" />
+      <workItem from="1589967729419" duration="125000" />
+      <workItem from="1589967945292" duration="109000" />
+      <workItem from="1589968541452" duration="91959000" />
+      <workItem from="1591040415129" duration="12842000" />
+      <workItem from="1591173277658" duration="3655000" />
+      <workItem from="1591265352957" duration="3933000" />
+      <workItem from="1591274013654" duration="399000" />
+      <workItem from="1591606462809" duration="36469000" />
+      <workItem from="1591777551077" duration="4833000" />
+      <workItem from="1591955537802" duration="8171000" />
+      <workItem from="1592230705750" duration="714000" />
+      <workItem from="1592231636127" duration="3789000" />
+      <workItem from="1592297485217" duration="15249000" />
+      <workItem from="1592469349395" duration="9355000" />
+      <workItem from="1592554694660" duration="11319000" />
+      <workItem from="1592923003014" duration="11373000" />
+      <workItem from="1593178199257" duration="6069000" />
+      <workItem from="1593261012933" duration="658000" />
+      <workItem from="1593441149863" duration="842000" />
+      <workItem from="1593535662495" duration="728000" />
+      <workItem from="1593771825818" duration="291000" />
+      <workItem from="1593772128382" duration="2000" />
+      <workItem from="1593772348114" duration="3174000" />
+      <workItem from="1593779771026" duration="921000" />
+      <workItem from="1593780868818" duration="4740000" />
+      <workItem from="1593786096494" duration="300000" />
+      <workItem from="1593787934042" duration="193000" />
+      <workItem from="1593792243102" duration="8000" />
+      <workItem from="1593792589094" duration="1657000" />
+      <workItem from="1593877235382" duration="63000" />
+      <workItem from="1594201992063" duration="48000" />
+      <workItem from="1594203338877" duration="1909000" />
+      <workItem from="1594213818832" duration="438000" />
+      <workItem from="1594381191018" duration="287000" />
+      <workItem from="1594655944189" duration="2573000" />
+      <workItem from="1594716690428" duration="27000" />
+      <workItem from="1594813156203" duration="1221000" />
+      <workItem from="1594831247666" duration="1775000" />
+      <workItem from="1594902828323" duration="10000" />
+      <workItem from="1594910344659" duration="8866000" />
+      <workItem from="1594970693247" duration="1736000" />
+      <workItem from="1595257558686" duration="9000" />
+      <workItem from="1595597322898" duration="632000" />
+      <workItem from="1595786430669" duration="128000" />
+      <workItem from="1595849601353" duration="105000" />
+      <workItem from="1596461657024" duration="4680000" />
+      <workItem from="1596493927899" duration="1266000" />
+      <workItem from="1596630186677" duration="370000" />
+      <workItem from="1597057405452" duration="14607000" />
+      <workItem from="1597076114602" duration="24000" />
+      <workItem from="1597223528407" duration="1634000" />
+      <workItem from="1597228066396" duration="590000" />
+      <workItem from="1597310266780" duration="4397000" />
+      <workItem from="1597316916316" duration="3281000" />
+      <workItem from="1597324163579" duration="8141000" />
+      <workItem from="1597332364248" duration="3949000" />
+      <workItem from="1597336349822" duration="2217000" />
+      <workItem from="1597338875981" duration="6047000" />
+    </task>
+    <task id="LOCAL-00001" summary="Updating to include all example files">
+      <created>1597336004785</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597336004785</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updating to include all example files">
+      <created>1597336049667</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597336049667</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update README.txt">
+      <created>1597339009375</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1597339009375</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update README.txt">
+      <created>1597406350857</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1597406350857</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Updating to include all example files" />
+    <MESSAGE value="Update README.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README.txt" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="645" y="329" key="#Notifications" timestamp="1597335767658">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="645" y="329" key="#Notifications/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597335767658" />
+    <state x="454" y="54" key="#generatewires" timestamp="1597406734353">
+      <screen x="0" y="23" width="1536" height="874" />
+    </state>
+    <state x="454" y="54" key="#generatewires/0.23.1536.874@0.23.1536.874" timestamp="1597406734353" />
+    <state x="527" y="335" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1597404322328">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="527" y="334" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313947598" />
+    <state x="527" y="358" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.23.1920.988/0.23.1536.937@0.23.1536.937" timestamp="1597334844543" />
+    <state x="527" y="335" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1536.873@0.23.1536.873" timestamp="1597404322328" />
+    <state x="230" y="35" key="CommitChangelistDialog2" timestamp="1597336149117">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="230" y="35" key="CommitChangelistDialog2/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597336149117" />
+    <state x="100" y="123" width="1336" height="673" key="DiffContextDialog" timestamp="1597403410742">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="100" y="123" width="1336" height="673" key="DiffContextDialog/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339592548" />
+    <state x="100" y="123" width="1336" height="673" key="DiffContextDialog/0.23.1536.873@0.23.1536.873" timestamp="1597403410742" />
+    <state x="549" y="198" key="FileChooserDialogImpl" timestamp="1593772973958">
+      <screen x="0" y="23" width="1536" height="863" />
+    </state>
+    <state x="489" y="177" key="FileChooserDialogImpl/0.0.1368.872/-1920.0.1536.824@0.0.1368.872" timestamp="1590013651693" />
+    <state x="489" y="177" key="FileChooserDialogImpl/0.0.1368.872/2736.0.1536.824@0.0.1368.872" timestamp="1593514380991" />
+    <state x="489" y="177" key="FileChooserDialogImpl/0.0.1368.872@0.0.1368.872" timestamp="1592311944125" />
+    <state x="549" y="198" key="FileChooserDialogImpl/0.23.1536.863@0.23.1536.863" timestamp="1593772973958" />
+    <state x="616" y="341" key="Github.ShareDialog" timestamp="1597407215915">
+      <screen x="0" y="23" width="1536" height="874" />
+    </state>
+    <state x="616" y="341" key="Github.ShareDialog/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339114638" />
+    <state x="616" y="364" key="Github.ShareDialog/-1920.23.1920.988/0.23.1536.937@0.23.1536.937" timestamp="1597335330811" />
+    <state x="616" y="341" key="Github.ShareDialog/0.23.1536.874@0.23.1536.874" timestamp="1597407215915" />
+    <state x="406" y="172" key="Github.UntrackedFilesDialog" timestamp="1597335359453">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state x="406" y="172" key="Github.UntrackedFilesDialog/-1920.23.1920.988/0.23.1536.937@0.23.1536.937" timestamp="1597335359453" />
+    <state width="1494" height="281" key="GridCell.Tab.0.bottom" timestamp="1597313154708">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.0.bottom/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154708" />
+    <state width="1326" height="280" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.0.bottom/0.23.1536.863@0.23.1536.863" timestamp="1593779514699" />
+    <state width="1494" height="281" key="GridCell.Tab.0.center" timestamp="1597313154708">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.0.center/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154708" />
+    <state width="1326" height="280" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.0.center/0.23.1536.863@0.23.1536.863" timestamp="1593779514698" />
+    <state width="1494" height="281" key="GridCell.Tab.0.left" timestamp="1597313154707">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.0.left/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154707" />
+    <state width="1326" height="280" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.0.left/0.23.1536.863@0.23.1536.863" timestamp="1593779513760" />
+    <state width="1494" height="281" key="GridCell.Tab.0.right" timestamp="1597313154708">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154708" />
+    <state width="1326" height="280" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.0.right/0.23.1536.863@0.23.1536.863" timestamp="1593779514699" />
+    <state width="1494" height="281" key="GridCell.Tab.1.bottom" timestamp="1597313154709">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.1.bottom/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154709" />
+    <state width="1326" height="280" key="GridCell.Tab.1.bottom/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.1.bottom/0.23.1536.863@0.23.1536.863" timestamp="1593779514700" />
+    <state width="1494" height="281" key="GridCell.Tab.1.center" timestamp="1597313154709">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.1.center/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154709" />
+    <state width="1326" height="280" key="GridCell.Tab.1.center/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.1.center/0.23.1536.863@0.23.1536.863" timestamp="1593779514699" />
+    <state width="1494" height="281" key="GridCell.Tab.1.left" timestamp="1597313154709">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.1.left/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154709" />
+    <state width="1326" height="280" key="GridCell.Tab.1.left/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.1.left/0.23.1536.863@0.23.1536.863" timestamp="1593779514699" />
+    <state width="1494" height="281" key="GridCell.Tab.1.right" timestamp="1597313154709">
+      <screen x="0" y="23" width="1536" height="869" />
+    </state>
+    <state width="1494" height="281" key="GridCell.Tab.1.right/-1920.23.1920.1057/0.23.1536.869@0.23.1536.869" timestamp="1597313154709" />
+    <state width="1326" height="280" key="GridCell.Tab.1.right/0.0.1368.872@0.0.1368.872" timestamp="1592323886375" />
+    <state width="1358" height="264" key="GridCell.Tab.1.right/0.23.1536.863@0.23.1536.863" timestamp="1593779514699" />
+    <state x="405" y="187" key="RollbackChangesDialog" timestamp="1597339057119">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="405" y="187" key="RollbackChangesDialog/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339057119" />
+    <state x="210" y="125" key="SettingsEditor" timestamp="1597335584362">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="210" y="125" key="SettingsEditor/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597335584362" />
+    <state x="187" y="95" key="SettingsEditor/0.0.1368.872@0.0.1368.872" timestamp="1591274024013" />
+    <state x="210" y="117" key="SettingsEditor/0.23.1536.863@0.23.1536.863" timestamp="1593772997164" />
+    <state x="619" y="380" key="VCS.ChangelistChooser" timestamp="1597339831684">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="619" y="380" key="VCS.ChangelistChooser/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339831684" />
+    <state x="100" y="123" width="1336" height="737" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1597322405346">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state x="100" y="123" width="1336" height="737" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1920.23.1920.988/0.23.1536.937@0.23.1536.937" timestamp="1597322405346" />
+    <state x="334" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1592502850256">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="334" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1368.872/-1920.0.1536.824@0.0.1368.872" timestamp="1589468130923" />
+    <state x="334" y="51" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1368.872@0.0.1368.872" timestamp="1592502850256" />
+    <state x="556" y="380" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597403410729">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="556" y="380" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339705863" />
+    <state x="556" y="380" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1536.873@0.23.1536.873" timestamp="1597403410729" />
+    <state x="469" y="43" width="598" height="822" key="find.popup" timestamp="1593774138330">
+      <screen x="0" y="23" width="1536" height="863" />
+    </state>
+    <state x="469" y="43" width="598" height="822" key="find.popup/0.23.1536.863@0.23.1536.863" timestamp="1593774138330" />
+    <state x="382" y="255" key="git4idea.merge.GitPullDialog" timestamp="1597403432645">
+      <screen x="0" y="23" width="1536" height="873" />
+    </state>
+    <state x="382" y="255" key="git4idea.merge.GitPullDialog/-1920.23.1920.1057/0.23.1536.873@0.23.1536.873" timestamp="1597339866550" />
+    <state x="382" y="255" key="git4idea.merge.GitPullDialog/0.23.1536.873@0.23.1536.873" timestamp="1597403432645" />
+    <state x="368" y="186" width="786" height="525" key="recent.locations.popup" timestamp="1593780705053">
+      <screen x="0" y="23" width="1536" height="863" />
+    </state>
+    <state x="368" y="186" width="786" height="525" key="recent.locations.popup/0.23.1536.863@0.23.1536.863" timestamp="1593780705053" />
+    <state x="368" y="186" width="786" height="526" key="recent.locations.popup/0.23.1536.865@0.23.1536.865" timestamp="1593773539349" />
+    <state x="396" y="228" width="755" height="699" key="search.everywhere.popup" timestamp="1597323561465">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state x="396" y="213" width="755" height="647" key="search.everywhere.popup/-1920.23.1920.1057/0.23.1536.868@0.23.1536.868" timestamp="1594911852496" />
+    <state x="396" y="228" width="755" height="699" key="search.everywhere.popup/-1920.23.1920.988/0.23.1536.937@0.23.1536.937" timestamp="1597323561465" />
+    <state x="353" y="191" width="672" height="649" key="search.everywhere.popup/0.0.1368.872@0.0.1368.872" timestamp="1592475059848" />
+    <state x="396" y="212" width="755" height="644" key="search.everywhere.popup/0.23.1536.865@0.23.1536.865" timestamp="1593773481796" />
+    <state x="606" y="255" key="svn.repositoryBrowser" timestamp="1597407359520">
+      <screen x="0" y="23" width="1536" height="874" />
+    </state>
+    <state x="606" y="255" key="svn.repositoryBrowser/0.23.1536.874@0.23.1536.874" timestamp="1597407359520" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../nottscoil/Modules/CylinderIntegralsMumetalMaths.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../MOGIC Coil/Testing/CleanData/paperplot3.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../nottscoil/Mike Paper/FieldHomogeneityImage.py</url>
+          <line>288</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../nottscoil/Modules/CylinderComponentFunctions.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Python_Code$StreamfunctionImageDropTower.coverage" NAME="StreamfunctionImageDropTower Coverage Results" MODIFIED="1592323878387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Brum Paper" />
+    <SUITE FILE_PATH="coverage/Python_Code$SummationTester.coverage" NAME="SummationTester Coverage Results" MODIFIED="1591693412333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python_Code$paperplot2.coverage" NAME="paperplot2 Coverage Results" MODIFIED="1588772669620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../MOGIC Coil/Testing/CleanData" />
+    <SUITE FILE_PATH="coverage/shielded_coil_design$biotsavart.coverage" NAME="biotsavart Coverage Results" MODIFIED="1597313161525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
+    <SUITE FILE_PATH="coverage/Python_Code$HomImageswapc.coverage" NAME="HomImageswapc Coverage Results" MODIFIED="1593774430013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Brum Paper" />
+  </component>
+</project>
