@@ -263,7 +263,7 @@ contours_mod_c1_cartesian, contours_mod_c1_cylindrical = targetpoints.poltocartc
                                                                                                      z_prime_c1s[0],
                                                                                                      z_prime_c2s[0]],
                                                                                        [n_phi_c, n_z_c])
-l_c1 = biotsavart.linestyle_cylindrical(contours_mod_c1_cylindrical)
+l_c1 = biotsavart.linestyle_cylindrical_modified(contours_mod_c1_cylindrical)
 
 fig2, ax2 = plt.subplots(1, 1)
 im = ax2.pcolormesh(coords_c1_cylindrical[:, 1].reshape(n_phi_c, n_z_c) / np.pi,
