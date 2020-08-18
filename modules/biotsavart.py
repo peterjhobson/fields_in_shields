@@ -74,13 +74,19 @@ def linestyle_cylindrical(cts_cylindrical):
 
         d_v = 0
 
-        if (np.isclose(cts_cylindrical[i][0, 1], 0, atol=1e-3) and
-                np.isclose(cts_cylindrical[i][-1, 1], 2 * np.pi, atol=1e-3)):
-            plotdash.append('--')
+        if np.allclose(cts_cylindrical[i][0, 2], cts_cylindrical[i][:, 2], atol=1e-6):
 
-        elif (np.isclose(cts_cylindrical[i][0, 1], 2 * np.pi, atol=1e-3) and
-              np.isclose(cts_cylindrical[i][-1, 1], 0, atol=1e-3)):
-            plotdash.append('-')
+            if (np.isclose(cts_cylindrical[i][0, 1], 0, atol=1e-6) and
+                    np.isclose(cts_cylindrical[i][-1, 1], 2 * np.pi, atol=1e-6)):
+
+                plotdash.append('--')
+
+            elif (np.isclose(cts_cylindrical[i][0, 1], 2 * np.pi, atol=1e-6) and
+                  np.isclose(cts_cylindrical[i][-1, 1], 0, atol=1e-6)):
+                plotdash.append('-')
+
+            else:
+                plotdash.append('-.')
 
         else:
 
