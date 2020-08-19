@@ -23,7 +23,7 @@ import sphericalharmonics
 import componentfunctions
 
 # CHOOSE YOUR SAVEPATH HERE!!!
-savepath = os.path.join(os.getcwd(), 'examples', '2Bx + Bz')
+savepath = os.path.join(os.getcwd(), 'simulations', 'test 1')
 if not os.path.exists(savepath):
     os.makedirs(savepath)
 else:
@@ -43,8 +43,7 @@ beta = 1e-16 * (1e-3 / 1.68e-8)  # weighting of the power optimization term #[1]
 res = 1.68e-8  # resistivity of the conductor #[Ohm m]
 t = 1e-3  # thickness of the conductor #[m]
 n_contours = 250
-B_des_ind = sphericalharmonics.b_sum(sphericalharmonics.b1p1(scale=2),
-                                     sphericalharmonics.b10(scale=1))  # desired magnetic field harmonic
+B_des_ind = sphericalharmonics.b_sum(sphericalharmonics.b1p1(scale=1))  # desired magnetic field harmonic
 # it's easiest to decompose field into spherical harmonics and add them together as appropriate
 
 new_containers = True
@@ -237,7 +236,7 @@ sf_c1 = componentfunctions.streamfunction_calculation(coords_c1_cylindrical, W0,
 sfct_c1 = np.fliplr(sf_c1.reshape(n_phi_c, n_z_c))
 curr_c1 = (sfct_c1.max() - sfct_c1.min()) / n_contours
 levels_c1 = sfct_c1.min() + (np.arange(1, n_contours + 1) - 0.5) * curr_c1
-X, Y = np.meshgrid(np.linspace(0, n_z_c-1, n_z_c), np.linspace(0, n_phi_c-1, n_phi_c))
+X, Y = np.meshgrid(np.linspace(0, n_z_c - 1, n_z_c), np.linspace(0, n_phi_c - 1, n_phi_c))
 cnts_c1 = plt.contour(X, Y, sfct_c1, levels=levels_c1).allsegs
 plt.close()
 
@@ -427,7 +426,7 @@ t1 = time.time()
 print('***Calculation along z-axis completed in {:.3} s***'.format(t1 - t0))
 
 # Field along z-axis
-B_ind = 2  # select index of field to plot
+B_ind = 0  # select index of field to plot
 if B_ind == 0:
     fpz = 'x'
 if B_ind == 1:
