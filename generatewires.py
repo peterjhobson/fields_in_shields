@@ -10,18 +10,12 @@ Script to design fields in shields. Change the parameters to adjust the coil, sh
 
 import glob
 import os
-import sys
 import time
 
 import numpy as np
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
-sys.path.append(os.path.join(os.getcwd(), 'modules'))
-import targetpoints
-import biotsavart
-import sphericalharmonics
-import componentfunctions
+from modules import targetpoints, biotsavart, sphericalharmonics, componentfunctions
 
 # CHOOSE YOUR SAVEPATH HERE!!!
 savepath = os.path.join(os.getcwd(), 'simulations', 'test')
@@ -43,8 +37,8 @@ p_maximum = 50  # upper bound to the 'p' summation (assumed to be infinity)
 beta = 1e-14 * (1e-3 / 1.68e-8)  # weighting of the power optimization term
 res = 1.68e-8  # resistivity of the conductor #[Ohm m]
 t = 1e-3  # thickness of the conductor #[m]
-n_contours = 18 # number of contour levels to save as plots/cure files
-n_contours_BS = 100 # number of contour levels for the Biot–Savart Law calculations
+n_contours = 18  # number of contour levels to save as plots/cure files
+n_contours_BS = 100  # number of contour levels for the Biot–Savart Law calculations
 B_des_ind = sphericalharmonics.b_sum(sphericalharmonics.b1p1(scale=1))  # desired magnetic field harmonic
 # it's easiest to decompose field into spherical harmonics and add them together as appropriate
 
@@ -92,7 +86,7 @@ coords_tp_cylindrical = targetpoints.cylinder_grid_cylindrical(
     [n_rho_tp, n_phi_tp, n_z_tp])
 
 # x measurement points
-l_x_mesx = 2*rho_cs[0]  # length of x position of measurement points #m
+l_x_mesx = 2 * rho_cs[0]  # length of x position of measurement points #m
 l_y_mesx = 1e-6  # length of y position of measurement points #m
 l_z_mesx = 1e-6  # length of z position of measurement points #m
 n_x_mesx = 101  # number of x samples  #[1]
@@ -109,7 +103,7 @@ l_z_mesz = (z_prime_c1s[0] - z_prime_c2s[0])  # length of z position of measurem
 n_x_mesz = 1  # number of x samples  #[1]
 n_y_mesz = 1  # number of y samples #[1]
 n_z_mesz = 101  # number of z samples #[1]
-c0_mesz = np.array((0, 0, (z_prime_c1s[0]+z_prime_c2s[0])/2))
+c0_mesz = np.array((0, 0, (z_prime_c1s[0] + z_prime_c2s[0]) / 2))
 coords_mesz_cylindrical = targetpoints.cubic_grid_cylindrical([l_x_mesz, l_y_mesz, l_z_mesz],
                                                               [n_x_mesz, n_y_mesz, n_z_mesz], c0_mesz)
 
