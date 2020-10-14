@@ -7,9 +7,8 @@ Created on Wed Jan 23 15:29:01 2019
 Wrapper functions to complete each step of inverse calculation in https://arxiv.org/abs/2006.02981.
 """
 
-import integrands
+from modules import integrands, powers
 import numpy as np
-import powers
 import scipy.integrate as integrate
 
 

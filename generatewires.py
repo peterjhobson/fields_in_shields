@@ -8,6 +8,7 @@ Script to design fields in shields. Change the parameters to adjust the coil, sh
 
 # %% PREAMBLE ##########################################################################################################
 
+import glob
 import os
 import sys
 import time
@@ -23,7 +24,7 @@ import sphericalharmonics
 import componentfunctions
 
 # CHOOSE YOUR SAVEPATH HERE!!!
-savepath = os.path.join(os.getcwd(), 'simulations', 'test 1')
+savepath = os.path.join(os.getcwd(), 'simulations', 'test')
 if not os.path.exists(savepath):
     os.makedirs(savepath)
 else:
@@ -37,12 +38,13 @@ if not os.path.exists(os.path.join(savepath, 'plots')):
 # optiparams
 N = 100  # maximum order of Fourier modes
 M = 1  # maximum degree of Fourier modes (equal to degree of the harmonic)
-k_maximum = 50  # upper bound to the 'k' integral (assumed to be infinity)
-p_maximum = 20  # upper bound to the 'p' summation (assumed to be infinity)
-beta = 1e-16 * (1e-3 / 1.68e-8)  # weighting of the power optimization term #[1]
+k_maximum = 500  # upper bound to the 'k' integral (assumed to be infinity)
+p_maximum = 50  # upper bound to the 'p' summation (assumed to be infinity)
+beta = 1e-14 * (1e-3 / 1.68e-8)  # weighting of the power optimization term
 res = 1.68e-8  # resistivity of the conductor #[Ohm m]
 t = 1e-3  # thickness of the conductor #[m]
-n_contours = 250
+n_contours = 18 # number of contour levels to save as plots/cure files
+n_contours_BS = 100 # number of contour levels for the Biot–Savart Law calculations
 B_des_ind = sphericalharmonics.b_sum(sphericalharmonics.b1p1(scale=1))  # desired magnetic field harmonic
 # it's easiest to decompose field into spherical harmonics and add them together as appropriate
 
@@ -50,15 +52,18 @@ new_containers = True
 # this is the slowest bit of the code -- if you're iterating the same N, M, target points and are
 # just changing beta / field harmonic then you can keep this off
 
-nomu_calculation = True
+nomu_calculation = False
 # do you want to calculate the integrals in the unshielded case?
 # turning this on will require longer computation times
 
+save_contours = True
+# do you want to save the plotted contours in Cartesian coordinates?
+
 # geometryparams
-rho_cs = np.array(0.245).reshape(1)  # radii of coils #m
-z_prime_c1s = np.array(0.475).reshape(1)  # top z position of coils #m
-z_prime_c2s = -z_prime_c1s  # bottom z position of coils #m
-n_phi_c = 400  # number of phi points to sample #[1]
+rho_cs = np.array(0.2).reshape(1)  # radii of coils #m
+z_prime_c1s = np.array(0.45).reshape(1)  # top z position of coils #m
+z_prime_c2s = -np.array(0.45).reshape(1)  # bottom z position of coils #m
+n_phi_c = 200  # number of phi points to sample #[1]
 n_z_c = 500  # number of z points to sample #[1]
 a = 0.25  # radius of the passive shield #m
 L = 1  # length of the passive shield #m
@@ -72,13 +77,13 @@ coords_c1_cylindrical = targetpoints.wirepoints_cylindrical([rho_cs[0], z_prime_
 
 # target points
 rho_min_tp = 0.01  # inner radius of target points #m
-rho_max_tp = 0.5 * rho_cs[0]  # outer radius of target points #m
+rho_max_tp = 0.6 * rho_cs[0]  # outer radius of target points #m
 phi_min_tp = 0
 # first angle of target points (rotated anticlockwise) #rads
 phi_max_tp = 3 * np.pi / 2
 # last angle of target points (rotated anticlockwise) #rads
-z_min_tp = 0.5 * z_prime_c2s[0]  # lowest axial position of target points #m
-z_max_tp = 0.5 * z_prime_c1s[0]  # highest axial position of target points #m
+z_min_tp = 0.6 * z_prime_c2s[0]  # lowest axial position of target points #m
+z_max_tp = 0.6 * z_prime_c1s[0]  # highest axial position of target points #m
 n_rho_tp = 4  # number of rho samples  #[1]
 n_phi_tp = 4  # number of phi samples #[1]
 n_z_tp = 5  # number of z samples #[1]
@@ -87,10 +92,10 @@ coords_tp_cylindrical = targetpoints.cylinder_grid_cylindrical(
     [n_rho_tp, n_phi_tp, n_z_tp])
 
 # x measurement points
-l_x_mesx = 2 * a  # length of x position of measurement points #m
+l_x_mesx = 2*rho_cs[0]  # length of x position of measurement points #m
 l_y_mesx = 1e-6  # length of y position of measurement points #m
 l_z_mesx = 1e-6  # length of z position of measurement points #m
-n_x_mesx = 201  # number of x samples  #[1]
+n_x_mesx = 101  # number of x samples  #[1]
 n_y_mesx = 1  # number of y samples #[1]
 n_z_mesx = 1  # number of z samples #[1]
 c0_mesx = np.array((0, 0, 0))
@@ -100,11 +105,11 @@ coords_mesx_cylindrical = targetpoints.cubic_grid_cylindrical([l_x_mesx, l_y_mes
 # z measurement points
 l_x_mesz = 1e-6  # length of x position of measurement points #m
 l_y_mesz = 1e-6  # length of y position of measurement points #m
-l_z_mesz = L  # length of z position of measurement points #m
+l_z_mesz = (z_prime_c1s[0] - z_prime_c2s[0])  # length of z position of measurement points #m
 n_x_mesz = 1  # number of x samples  #[1]
 n_y_mesz = 1  # number of y samples #[1]
-n_z_mesz = 201  # number of z samples #[1]
-c0_mesz = np.array((0, 0, 0))
+n_z_mesz = 101  # number of z samples #[1]
+c0_mesz = np.array((0, 0, (z_prime_c1s[0]+z_prime_c2s[0])/2))
 coords_mesz_cylindrical = targetpoints.cubic_grid_cylindrical([l_x_mesz, l_y_mesz, l_z_mesz],
                                                               [n_x_mesz, n_y_mesz, n_z_mesz], c0_mesz)
 
@@ -168,7 +173,7 @@ ax1.quiver(
     B_des_tp_cartesian[:, 0],
     B_des_tp_cartesian[:, 1],
     B_des_tp_cartesian[:, 2],
-    color='red', length=0.02)
+    color='red', length=0.05)
 ax1.set_xlabel(r'$x$ (m)')
 ax1.set_ylabel(r'$y$ (m)')
 ax1.set_zlabel(r'$z$ (m)')
@@ -209,8 +214,9 @@ t1 = time.time()
 print('***Shield calculation completed in {:.3} s***'.format(t1 - t0))
 
 # %% NO SHIELD #######################################################################################################
+t0 = time.time()
+
 if nomu_calculation:
-    t0 = time.time()
 
     if new_containers:
         W0_targetpoints_nomu, W_targetpoints_nomu, Q_targetpoints_nomu = componentfunctions.integral_containers_nomu(
@@ -223,9 +229,9 @@ if nomu_calculation:
 
     np.savetxt(os.path.join(savepath, 'B_nomu_analytic_tp.csv'), B_nomu_analytic_tp_cartesian, delimiter=",")
 
-    t1 = time.time()
+t1 = time.time()
 
-    print('***No shield calculation completed in {:.3} s***'.format(t1 - t0))
+print('***No shield calculation completed in {:.3} s***'.format(t1 - t0))
 
 # %% STREAM-FUNCTION ###################################################################################################
 t0 = time.time()
@@ -234,8 +240,8 @@ t0 = time.time()
 sf_c1 = componentfunctions.streamfunction_calculation(coords_c1_cylindrical, W0, W, Q, z_prime_c1s[0], z_prime_c2s[0],
                                                       [N, M])
 sfct_c1 = np.fliplr(sf_c1.reshape(n_phi_c, n_z_c))
-curr_c1 = (sfct_c1.max() - sfct_c1.min()) / n_contours
-levels_c1 = sfct_c1.min() + (np.arange(1, n_contours + 1) - 0.5) * curr_c1
+curr_c1 = (sfct_c1.max() - sfct_c1.min()) / n_contours_BS
+levels_c1 = sfct_c1.min() + (np.arange(1, n_contours_BS + 1) - 0.5) * curr_c1
 X, Y = np.meshgrid(np.linspace(0, n_z_c - 1, n_z_c), np.linspace(0, n_phi_c - 1, n_phi_c))
 cnts_c1 = plt.contour(X, Y, sfct_c1, levels=levels_c1).allsegs
 plt.close()
@@ -250,12 +256,11 @@ np.savetxt(os.path.join(savepath, 'B_BiotSavart_tp.csv'), B_BS_tp_cartesian, del
 t1 = time.time()
 print('***Optimum contours calculated in {:.3} s***'.format(t1 - t0))
 
-# 2D plot of the contours on the surface. Adjust n_cont_c1_mod to change the number of contour levels.
+# 2D plot of the contours on the surface. Adjust n_contours to change the number of contour levels.
 n_phi_mod = 0
-n_cont_c1_mod = 16
-levels_mod_c1 = sfct_c1.min() + (np.arange(1, n_cont_c1_mod + 1) - 0.5) * (
-        sfct_c1.max() - sfct_c1.min()) / n_cont_c1_mod
-cnts_mod_c1 = plt.contour(sfct_c1, n_phi_mod, levels=levels_mod_c1).allsegs
+levels_mod_c1 = sfct_c1.min() + (np.arange(1, n_contours + 1) - 0.5) * (
+        sfct_c1.max() - sfct_c1.min()) / n_contours
+cnts_mod_c1 = plt.contour(X, Y, sfct_c1, n_phi_mod, levels=levels_mod_c1).allsegs
 plt.close()
 
 contours_mod_c1_cartesian, contours_mod_c1_cylindrical = targetpoints.poltocartcontour(cnts_mod_c1, [rho_cs[0],
@@ -264,24 +269,36 @@ contours_mod_c1_cartesian, contours_mod_c1_cylindrical = targetpoints.poltocartc
                                                                                        [n_phi_c, n_z_c])
 l_c1 = biotsavart.linestyle_cylindrical(contours_mod_c1_cylindrical)
 
+if save_contours:
+    if not os.path.exists(os.path.join(savepath, 'contours_levels_{}'.format(n_contours))):
+        os.makedirs(os.path.join(savepath, 'contours_levels_{}'.format(n_contours)))
+
+    for f in glob.glob(os.path.join(savepath, 'contours_levels_{}'.format(n_contours), '*')):
+        os.remove(f)
+
+    for i in range(len(contours_mod_c1_cartesian)):
+        np.savetxt(os.path.join(savepath, 'contours_levels_{}'.format(n_contours), '{}-cylinder.txt'.format(i)),
+                   contours_mod_c1_cartesian[i],
+                   delimiter=",")
+
+    print('***Contours saved to {}***'.format(os.path.join(savepath, 'contours_levels_{}'.format(n_contours))))
+
 fig2, ax2 = plt.subplots(1, 1)
 im = ax2.pcolormesh(coords_c1_cylindrical[:, 1].reshape(n_phi_c, n_z_c) / np.pi,
-                    coords_c1_cylindrical[:, 2].reshape(n_phi_c, n_z_c) / (2 * z_prime_c1s[0]),
+                    coords_c1_cylindrical[:, 2].reshape(n_phi_c, n_z_c),
                     np.fliplr(sfct_c1),
                     vmin=np.min(sfct_c1) * 1.5, vmax=np.max(sfct_c1) * 1.5, cmap=plt.cm.bwr)
 for i in range(len(contours_mod_c1_cartesian)):
     ax2.plot(contours_mod_c1_cylindrical[i][:, 1] / np.pi,
-             contours_mod_c1_cylindrical[i][:, 2] / (2 * z_prime_c1s[0]),
+             contours_mod_c1_cylindrical[i][:, 2],
              color='black', linestyle=l_c1[i], linewidth=1)
 ax2.set_xticks(np.arange(0, 2.5, step=0.5))  # Set label locations.
-ax2.set_yticks(np.arange(-0.4, 0.6, step=0.2))  # Set label locations.
 ax2.set_xlim(0, 2)
-ax2.set_ylim(-0.5, 0.5)
 ax2.set_xlabel(r'${\phi}/\pi$')
-ax2.set_ylabel(r'$z/L_c$')
+ax2.set_ylabel(r'$z$' + r' $\mathrm{ (m)}$')
 ax2.minorticks_on()
 fig2.tight_layout()
-plt.savefig(os.path.join(savepath, 'plots', 'wiredesigns'), dpi=300)
+plt.savefig(os.path.join(savepath, 'plots', 'wiredesigns_levels_{}'.format(n_contours)), dpi=300)
 fig2.show()
 
 # 3D plot of the fields
@@ -294,7 +311,7 @@ ax3.quiver(
     B_des_tp_cartesian[:, 0],
     B_des_tp_cartesian[:, 1],
     B_des_tp_cartesian[:, 2],
-    length=0.02, color='black')
+    length=0.05, color='black')
 ax3.quiver(
     targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
     targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
@@ -302,7 +319,7 @@ ax3.quiver(
     B_analytic_tp_cartesian[:, 0],
     B_analytic_tp_cartesian[:, 1],
     B_analytic_tp_cartesian[:, 2],
-    length=0.02, color='red')
+    length=0.05, color='red')
 if nomu_calculation:
     ax3.quiver(
         targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
@@ -311,7 +328,7 @@ if nomu_calculation:
         B_nomu_analytic_tp_cartesian[:, 0],
         B_nomu_analytic_tp_cartesian[:, 1],
         B_nomu_analytic_tp_cartesian[:, 2],
-        length=0.02, color='orange')
+        length=0.05, color='orange')
 ax3.quiver(
     targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
     targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
@@ -319,7 +336,7 @@ ax3.quiver(
     B_BS_tp_cartesian[:, 0],
     B_BS_tp_cartesian[:, 1],
     B_BS_tp_cartesian[:, 2],
-    length=0.02, color='green')
+    length=0.05, color='green')
 ax3.scatter(targetpoints.poltocart(coords_tp_cylindrical)[:, 0],
             targetpoints.poltocart(coords_tp_cylindrical)[:, 1],
             targetpoints.poltocart(coords_tp_cylindrical)[:, 2])
@@ -375,6 +392,8 @@ if B_ind == 2:
     fpx = 'z'
 
 fig4, ax4 = plt.subplots(1, 1)
+ax4.axvline(-rho_max_tp, color='grey', ls=':', zorder=0)
+ax4.axvline(rho_max_tp, color='grey', ls=':', zorder=0)
 ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_des_mesx_cartesian[:, B_ind], color='black')
 ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_analytic_mesx_cartesian[:, B_ind], color='red',
          zorder=20)
@@ -384,8 +403,7 @@ if nomu_calculation:
     ax4.plot(targetpoints.poltocart(coords_mesx_cylindrical)[:, 0], B_nomu_analytic_mesx_cartesian[:, B_ind],
              color='orange')
 ax4.set_xlabel('$x$' + r' $\mathrm{ (m)}$')
-ax4.set_ylabel(r'$B_{{{}}}$'.format(fpx) + r' $\mathrm{ (T)}$')
-ax4.set_xlim(-a, a)
+ax4.set_ylabel(r'$B_{{{}}}$'.format(fpx))
 fig4.tight_layout()
 plt.savefig(os.path.join(savepath, 'plots', 'x-axis'), dpi=300)
 fig4.show()
@@ -435,6 +453,8 @@ if B_ind == 2:
     fpz = 'z'
 
 fig5, ax5 = plt.subplots(1, 1)
+ax5.axvline(z_min_tp, color='grey', ls=':', zorder=0)
+ax5.axvline(z_max_tp, color='grey', ls=':', zorder=0)
 ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_des_mesz_cartesian[:, B_ind], color='black')
 ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_analytic_mesz_cartesian[:, B_ind], color='red',
          zorder=20)
@@ -444,8 +464,7 @@ if nomu_calculation:
     ax5.plot(targetpoints.poltocart(coords_mesz_cylindrical)[:, 2], B_nomu_analytic_mesz_cartesian[:, B_ind],
              color='orange')
 ax5.set_xlabel('$z$' + r' $\mathrm{ (m)}$')
-ax5.set_ylabel(r'$B_{{{}}}$'.format(fpz) + r' $\mathrm{ (T)}$')
-ax5.set_xlim(-L / 2, L / 2)
+ax5.set_ylabel(r'$B_{{{}}}$'.format(fpz))
 fig5.tight_layout()
 plt.savefig(os.path.join(savepath, 'plots', 'z-axis'), dpi=300)
 fig5.show()
