@@ -4,7 +4,7 @@ Created on Tue Jan 29 13:20:33 2019
 
 @author: PJ Hobson
 
-Generate target points.
+Generate target points and perform coordinate transformations.
 """
 
 import numpy as np

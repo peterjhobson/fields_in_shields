@@ -65,7 +65,6 @@ def linestyle_cylindrical(cts_cylindrical):
     Keyword arguments:
     cts_cylindrical -- contours in cylindrical coordinates output from targetpoints.poltocartcontour() function
 
-    TO UPDATE
     """
 
     plotdash = []
