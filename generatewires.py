@@ -14,6 +14,7 @@ import time
 
 import numpy as np
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 from modules import targetpoints, biotsavart, sphericalharmonics, componentfunctions
 
@@ -54,7 +55,7 @@ save_contours = True
 # do you want to save the plotted contours in Cartesian coordinates?
 
 # geometryparams
-rho_cs = np.array(0.2).reshape(1)  # radii of coils #m
+rho_cs = np.array(0.20).reshape(1)  # radii of coils #m
 z_prime_c1s = np.array(0.45).reshape(1)  # top z position of coils #m
 z_prime_c2s = -np.array(0.45).reshape(1)  # bottom z position of coils #m
 n_phi_c = 200  # number of phi points to sample #[1]
