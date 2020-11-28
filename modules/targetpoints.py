@@ -95,7 +95,7 @@ def wirepoints_cylindrical(dim, ns):
     dim -- rho_c -- radius of cylindrical coil
         -- z_prime_c1 -- top position of cylindrical coil
         -- z_prime_c2 -- bottom position of cylindrical coil
-    ns -- nphi -- number of points radially
+    ns -- nphi -- number of points azimuthally
        -- nz -- number of points axially
     """
 
@@ -107,6 +107,29 @@ def wirepoints_cylindrical(dim, ns):
 
     rhoc, phic, zc = np.meshgrid(rho_c, np.linspace(0, 2 * np.pi, nphi),
                                  np.linspace(z_prime_c1, z_prime_c2, nz))
+
+    return np.stack((rhoc.flatten(), phic.flatten(), zc.flatten()), axis=1)
+
+
+def wirepoints_planar(dim, ns):
+    """Create a plane of points on a coil surface. Returns in cylindrical coordinates.
+
+    Keyword arguments:
+    dim -- rho_p -- radius of planar coil
+        -- z_prime_p -- position of planar coil
+    ns -- nrho -- number of points radially
+       -- nphi -- number of points azimuthally
+    """
+
+    rho_p, z_prime_p = dim
+    nrho, nphi = ns
+
+    nrho = int(nrho)
+    nphi = int(nphi)
+
+    rhoc, phic, zc = np.meshgrid(np.linspace(0, rho_p, nrho),
+                                 np.linspace(0, 2 * np.pi, nphi),
+                                 z_prime_p)
 
     return np.stack((rhoc.flatten(), phic.flatten(), zc.flatten()), axis=1)
 
@@ -180,7 +203,7 @@ def fieldpoltocart(input_vector, input_coords_cylindrical):
 
 
 def poltocartcontour(contour_list, dim, ns):
-    """Convert a contour output from matplotlib.pyplot.contour() into a list of contour arrays on the coil surface.
+    """Convert a contour output from matplotlib.pyplot.contour() into a list of contour arrays on a cylindrical coil surface.
     Returns in Cartesian and cylindrical coordinates.
 
     Keyword arguments:
@@ -188,7 +211,7 @@ def poltocartcontour(contour_list, dim, ns):
     dim -- rho_c -- radius of cylindrical coil
         -- z_prime_c1 -- top position of cylindrical coil
         -- z_prime_c2 -- bottom position of cylindrical coil
-    ns -- nphi -- number of points radially
+    ns -- nphi -- number of points azimuthally
        -- nz -- number of points axially
     """
 
@@ -219,6 +242,50 @@ def poltocartcontour(contour_list, dim, ns):
                 output_vector_cylindrical[:, 0] = np.ones(c_z.shape[0]) * rho_c
                 output_vector_cylindrical[:, 1] = c_phi
                 output_vector_cylindrical[:, 2] = c_z
+                contours_cylindrical.append(output_vector_cylindrical)
+
+    return contours, contours_cylindrical
+
+
+def poltocartcontour_planar(contour_list, dim, ns):
+    """Convert a contour output from matplotlib.pyplot.contour() into a list of contour arrays on a planar coil surface.
+    Returns in Cartesian and cylindrical coordinates.
+
+    Keyword arguments:
+    contour_list -- list of contours in cylindrical coordinates
+    dim -- rho_p -- radius of planar coil
+        -- z_prime_p -- position of planar coil
+    ns -- nrho -- number of points radially
+       -- nphi -- number of points azimuthally
+    """
+
+    rho_p, z_prime_p = dim
+    nrho, nphi = ns
+
+    contours = []
+    contours_cylindrical = []
+
+    for i in range(len(contour_list)):
+
+        for j in range(len(contour_list[i])):
+
+            if len(contour_list[i][j]) > 3:
+                # length 3 would be start - finish - start
+                # which will cancel necessarily
+
+                c_rho = (contour_list[i][j][:, 0] * rho_p / (nrho - 1))
+                c_phi = (contour_list[i][j][:, 1] * 2 * np.pi / (nphi - 1))
+
+                output_vector = np.zeros((c_rho.shape[0], 3))
+                output_vector[:, 0] = (c_rho * np.cos(c_phi))
+                output_vector[:, 1] = (c_rho * np.sin(c_phi))
+                output_vector[:, 2] = (np.ones(c_rho.shape[0]) * z_prime_p)
+                contours.append(output_vector)
+
+                output_vector_cylindrical = np.zeros((c_rho.shape[0], 3))
+                output_vector_cylindrical[:, 0] = c_rho
+                output_vector_cylindrical[:, 1] = c_phi
+                output_vector_cylindrical[:, 2] = np.ones(c_rho.shape[0]) * z_prime_p
                 contours_cylindrical.append(output_vector_cylindrical)
 
     return contours, contours_cylindrical

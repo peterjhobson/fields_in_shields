@@ -107,3 +107,34 @@ def linestyle_cylindrical(cts_cylindrical):
                 plotdash.append('-.')
 
     return plotdash
+
+
+def linestyle_planar(cts):
+    """Defines the line-style of clockwise and anticlockwise contours on a planar surface.
+
+    Keyword arguments:
+    cts -- contours in Cartesian coordinates output from targetpoints.poltocartcontour_planar() function
+
+    """
+
+    plotdash = []
+
+    for i in range(len(cts)):
+
+        dV = 0
+
+        for k in range(len(cts[i]) - 2):
+            VC = np.cross(np.array((cts[i][k + 1, 0] - cts[i][k, 0],
+                                    cts[i][k + 1, 1] - cts[i][k, 1], 0.)),
+                          np.array((cts[i][k + 2, 0] - cts[i][k + 1, 0],
+                                    cts[i][k + 2, 1] - cts[i][k + 1, 1], 0.)))
+
+            dV += VC[2]
+
+        if np.sign(dV) == 1:
+            plotdash.append('-')
+
+        if np.sign(dV) == -1:
+            plotdash.append('--')
+
+    return plotdash

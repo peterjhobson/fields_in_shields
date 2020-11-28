@@ -4,7 +4,7 @@ Created on Wed Jan 23 15:29:01 2019
 
 @author: PJ Hobson
 
-Calculate integrands and summation arguments from Eq.(45-68) of https://arxiv.org/abs/2006.02981. Note that the
+Calculate integrands and summation arguments for cylindrical coil calculation. Note that the
 arguments have been converted from exponential to sinusoid and odd/even limits of integrals have been applied to
 speed-up calculation.
 """
