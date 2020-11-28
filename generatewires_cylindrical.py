@@ -22,7 +22,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from modules import targetpoints, biotsavart, sphericalharmonics, componentfunctions
 
 # CHOOSE YOUR SAVEPATH HERE!!!
-savepath = os.path.join(os.getcwd(), 'examples_cylindrical', 'Bx')
+savepath = os.path.join(os.getcwd(), 'simulations', 'Bx')
 if not os.path.exists(savepath):
     os.makedirs(savepath)
 else:
